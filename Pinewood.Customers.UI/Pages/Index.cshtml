@@ -1,0 +1,28 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+    ViewData["Customers"] = Model.customerList;
+
+}
+
+<div class="text-center">
+    <h1 class="display-4">Customer List</h1>
+    
+</div>
+
+<div id="content">
+    @foreach (var item in Model.customerList as List<Pinewood.Customer.Business.Customer>)
+    {
+    <div class="Customer_Info">
+        <h3>@item.Name</h3>
+        <p>Customer ID: @item.ID</p>
+        <p>Email: @item.Email</p>
+        <p>Phone: @item.Phone</p>
+        <p>Location: @item.LocationString</p>
+    </div>
+        <hr />
+        //@item.FileName //instead .FileName use property which you have used in your model class
+    }
+
+</div>

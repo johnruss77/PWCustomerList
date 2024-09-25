@@ -1,0 +1,24 @@
+ [
+    {
+      "ID": 1,
+      "Name": "John Russell",
+      "Email": "john.russell@acme.com",
+      "Phone": "0363676635",
+      "LocationID": 1
+    },
+    {
+      "ID": 2,
+      "Name": "Jack Jones",
+      "Email": "j@blargle.co.uk",
+      "Phone": "1244566566",
+      "LocationID": 2
+    },
+    {
+      "ID": 3,
+      "Name": "Belinda Smith",
+      "Email": "Smith.B123@geenail.com",
+      "Phone": "9988736663",
+      "LocationID": 2
+    }
+  ]
+
