@@ -16,22 +16,44 @@ using Newtonsoft.Json;
 
 namespace Pinewood.Customers.UI.Pages
 {
-    public class CreateModel : PageModel
+    public class EditModel : PageModel
     {
         public string JsonContent { get; set; }
 
-        public List<Pinewood.Customer.Business.Customer> customerList;
+        //public Pinewood.Customer.Business.Customer customer;
 
         private readonly ILogger<IndexModel> _logger;
 
-        public CreateModel(ILogger<IndexModel> logger)
+        public EditModel(ILogger<IndexModel> logger)
         {
             _logger = logger;
         }
 
         public IActionResult OnGet()
         {
+            string customerID = HttpContext.Request.Query["id"][0];
+
+
+            HttpWebRequest request = (HttpWebRequest)WebRequest.Create("http://localhost:43681/customer/api/customer/"+customerID);
+            request.AutomaticDecompression = DecompressionMethods.GZip | DecompressionMethods.Deflate;
+
+            string jsonResult = "";
+            using (HttpWebResponse response = (HttpWebResponse)request.GetResponse())
+            using (Stream stream = response.GetResponseStream())
+            using (StreamReader reader = new StreamReader(stream))
+            {
+                jsonResult = reader.ReadToEnd();
+
+            }
+
+            this.JsonContent = jsonResult.ToString();
+
+            this.Customer = JsonConvert.DeserializeObject<Pinewood.Customer.Business.Customer>(JsonContent);
+
             return Page();
+
+
+
 
         }
 
@@ -49,7 +71,7 @@ namespace Pinewood.Customers.UI.Pages
             request.ContentType = "application/json";
             request.Method = "POST";
 
-            string jsonPost = JsonConvert.SerializeObject(Customer); 
+            string jsonPost = JsonConvert.SerializeObject(Customer);
 
             using (var streamWriter = new StreamWriter(request.GetRequestStream()))
             {

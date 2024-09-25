@@ -14,6 +14,7 @@ namespace Pinewood.Customer.Business
         
         public string Email { get; set; }
         public string Phone { get; set; }
+        public int LocationID { get; set; }
         public string LocationString { get; set; }
 
     }

@@ -20,6 +20,10 @@
         <p>Email: @item.Email</p>
         <p>Phone: @item.Phone</p>
         <p>Location: @item.LocationString</p>
+        <p>
+            <a class="text-dark" asp-area="" asp-page="/Customer/Edit" asp-route-ID="@item.ID">Edit</a> | <a class="text-dark" asp-area="" asp-page="/Customer/Delete" asp-route-ID="@item.ID">Delete</a>
+        </p> 
+        
     </div>
         <hr />
         //@item.FileName //instead .FileName use property which you have used in your model class

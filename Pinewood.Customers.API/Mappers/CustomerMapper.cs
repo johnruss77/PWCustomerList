@@ -24,6 +24,7 @@ namespace Pinewood.Customers.API.Mappers
                     
                     Email = e.Email,
                     Phone = e.Phone,
+                    LocationID = e.LocationID,
                     LocationString =  locations.Where(l => l.ID == e.LocationID).FirstOrDefault()?.Name,
 
                 };
