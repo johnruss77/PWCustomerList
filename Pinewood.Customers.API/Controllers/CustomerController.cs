@@ -10,6 +10,7 @@ using System.IO;
 using System.Text.Json;
 using Pinewood.Customers.API.ViewModels.Customer;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace Pinewood.Customers.API.Controllers
 {
@@ -91,8 +92,23 @@ namespace Pinewood.Customers.API.Controllers
                     .OrderBy(e => e.Name)
                     .ToList();
 
-
                 customer = customerList.Where(c => c.ID == id).FirstOrDefault();
+
+                if (customer == null)
+                {
+                    // Create new
+                    int latestID = customerList.OrderByDescending(item => item.ID).First().ID;
+
+                    customer = new()
+                    {
+                        ID = latestID + 1,
+                        Name = "",
+                        Email = "",
+                        Phone = "",
+                        LocationID = 0
+                    };
+                
+                }
 
             }
 
@@ -136,6 +152,18 @@ namespace Pinewood.Customers.API.Controllers
 
                     // update customer.json file to remove the deleted customer
 
+                    List<CustomerViewModel> newCustList = updatedCustomerList.ToList();
+
+                    string custListStr = JsonConvert.SerializeObject(newCustList, Formatting.Indented);
+
+                    if (custListStr == String.Empty)
+                    {
+                        throw new Exception("Error updating Customer list");
+                    }
+
+                    // Write the updated JSON back to the file
+                    System.IO.File.WriteAllText(filePathCust, custListStr);
+
                     opresult.Data = true;
                     opresult.Success = true;
                     opresult.Message = "OK";
@@ -177,6 +205,8 @@ namespace Pinewood.Customers.API.Controllers
 
             };
 
+            string custListStr = String.Empty;
+
             try
             {
                 customerList = Mappers.CustomerMapper.MapFromEntity(custList, locList)
@@ -199,10 +229,11 @@ namespace Pinewood.Customers.API.Controllers
                     customer.LocationID = customerPostModel.LocationID;
 
                     updatedCustomerList = customerList.Where(c => c.ID != customerPostModel.ID);
-                    updatedCustomerList.Append(customer);
-
+                    List<CustomerViewModel> newCustList = updatedCustomerList.Append(customer).ToList();
+                    
                     // update customer.json with modified customer
 
+                    custListStr = JsonConvert.SerializeObject(newCustList, Formatting.Indented);
                 }
                 else
                 {
@@ -217,13 +248,19 @@ namespace Pinewood.Customers.API.Controllers
                         LocationID = customerPostModel.LocationID
                     };
 
-                    customerList.Append(customer);
+                    List<CustomerViewModel> newCustList = customerList.Append(customer).ToList();
 
-                    // update customer.json with new customer
+                    custListStr = JsonConvert.SerializeObject(newCustList, Formatting.Indented);
 
                 }
 
+                if (custListStr == String.Empty)
+                {
+                    throw new Exception("Error updating Customer list");
+                }
 
+                // Write the updated JSON back to the file
+                System.IO.File.WriteAllText(filePathCust, custListStr);
 
             }
             catch (Exception e)

@@ -20,8 +20,6 @@ namespace Pinewood.Customers.UI.Pages
     {
         public string JsonContent { get; set; }
 
-        //public Pinewood.Customer.Business.Customer customer;
-
         private readonly ILogger<IndexModel> _logger;
 
         public EditModel(ILogger<IndexModel> logger)
@@ -50,15 +48,33 @@ namespace Pinewood.Customers.UI.Pages
 
             this.Customer = JsonConvert.DeserializeObject<Pinewood.Customer.Business.Customer>(JsonContent);
 
+            //--------------------------------Get Locations
+
+            HttpWebRequest requestLoc = (HttpWebRequest)WebRequest.Create("http://localhost:43681/location/api/location");
+            requestLoc.AutomaticDecompression = DecompressionMethods.GZip | DecompressionMethods.Deflate;
+
+            string jsonResultLoc = "";
+            using (HttpWebResponse responseLoc = (HttpWebResponse)requestLoc.GetResponse())
+            using (Stream stream = responseLoc.GetResponseStream())
+            using (StreamReader readerLoc = new StreamReader(stream))
+            {
+                jsonResultLoc = readerLoc.ReadToEnd();
+
+            }
+
+            this.JsonContent = jsonResultLoc.ToString();
+
+            this.locList = JsonConvert.DeserializeObject<List<Pinewood.Customer.Business.Location>>(JsonContent);
+
             return Page();
-
-
-
 
         }
 
         [BindProperty]
         public Pinewood.Customer.Business.Customer? Customer { get; set; }
+
+        [BindProperty]
+        public List<Pinewood.Customer.Business.Location>? locList { get; set; }
 
         public IActionResult OnPost()
         {

@@ -14,20 +14,23 @@
             Name:
             <input asp-for="Customer!.Name" />
         </p>
-        <p>Customer ID:
-        <input asp-for="Customer!.ID" />
+        <p>
+            Customer ID:
+            <input asp-for="Customer!.ID" readonly />
         </p>
         <p>
-        Email:
-        <input asp-for="Customer!.Email" />
+            Email:
+            <input asp-for="Customer!.Email" />
         </p>
         <p>
-        Phone:
-        <input asp-for="Customer!.Phone" />
+            Phone:
+            <input asp-for="Customer!.Phone" />
         </p>
         <p>
-        Location:
-        <input asp-for="Customer!.LocationID" />
+            Location:
+            <select asp-for="Customer!.LocationID" asp-items="@(new SelectList(Model.locList, "ID", "Name"))">
+                <option value="">Choose Location</option>
+            </select>
         </p>
     </div>
     <hr />

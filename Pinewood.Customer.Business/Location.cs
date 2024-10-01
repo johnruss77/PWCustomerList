@@ -8,5 +8,8 @@ namespace Pinewood.Customer.Business
 {
     public class Location
     {
+        public int ID { get; set; }
+        // Customer full name
+        public string Name { get; set; }
     }
 }
