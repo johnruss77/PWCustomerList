@@ -11,7 +11,7 @@
     
 </div>
 
-<div id="content">
+<section id="content">
     @foreach (var item in Model.customerList as List<Pinewood.Customer.Business.Customer>)
     {
     <div class="Customer_Info">
@@ -21,7 +21,7 @@
         <p>Phone: @item.Phone</p>
         <p>Location: @item.LocationString</p>
         <p>
-            <a class="text-dark" asp-area="" asp-page="/Customer/Edit" asp-route-ID="@item.ID">Edit</a> | <a class="text-dark" asp-area="" asp-page="/Customer/Delete" asp-route-ID="@item.ID">Delete</a>
+            <a  class="button" asp-area="" asp-page="/Customer/Edit" asp-route-ID="@item.ID">Edit</a> | <a class="delete-button" asp-area="" asp-page="/Customer/Delete" asp-route-ID="@item.ID">Delete</a>
         </p> 
         
     </div>
@@ -29,4 +29,4 @@
         //@item.FileName //instead .FileName use property which you have used in your model class
     }
 
-</div>
+</section>

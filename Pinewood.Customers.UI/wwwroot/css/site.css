@@ -1,71 +1,121 @@
-﻿/* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
-for details on configuring this project to bundle and minify static web assets. */
-
-a.navbar-brand {
-  white-space: normal;
-  text-align: center;
-  word-break: break-all;
-}
-
-/* Provide sufficient contrast against white background */
-a {
-  color: #0366d6;
-}
-
-.btn-primary {
-  color: #fff;
-  background-color: #1b6ec2;
-  border-color: #1861ac;
-}
-
-.nav-pills .nav-link.active, .nav-pills .show > .nav-link {
-  color: #fff;
-  background-color: #1b6ec2;
-  border-color: #1861ac;
-}
-
-/* Sticky footer styles
--------------------------------------------------- */
-html {
-  font-size: 14px;
-}
-@media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
-}
-
-.border-top {
-  border-top: 1px solid #e5e5e5;
-}
-.border-bottom {
-  border-bottom: 1px solid #e5e5e5;
-}
-
-.box-shadow {
-  box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
-}
-
-button.accept-policy {
-  font-size: 1rem;
-  line-height: inherit;
-}
-
-/* Sticky footer styles
--------------------------------------------------- */
-html {
-  position: relative;
-  min-height: 100%;
-}
-
+﻿/* Global Styles */
 body {
-  /* Margin bottom by footer height */
-  margin-bottom: 60px;
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    color: #333;
+    background-color: #f8f9fa; /* Light background */
 }
-.footer {
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  white-space: nowrap;
-  line-height: 60px; /* Vertically center the text there */
+
+/* Header Styles */
+header {
+    background-color: #004080; /* Dark blue */
+    color: #ffffff;
+    padding: 20px;
+    text-align: center;
+}
+
+    header h1 {
+        margin: 0;
+        font-size: 2.5em;
+    }
+
+nav {
+    margin-top: 10px;
+}
+
+    nav a {
+        color: #ffffff;
+        text-decoration: none;
+        margin: 0 15px;
+        font-weight: bold;
+    }
+
+        nav a:hover {
+            text-decoration: underline;
+        }
+
+/* Main Content Styles */
+main {
+    padding: 20px;
+    max-width: 1200px;
+    margin: auto;
+}
+
+/* Section Styles */
+section {
+    margin-bottom: 40px;
+    padding: 20px;
+    background-color: #ffffff; /* White background for sections */
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+    section h2 {
+        color: #004080; /* Dark blue for headings */
+        font-size: 1.8em;
+        border-bottom: 2px solid #004080; /* Underline for emphasis */
+        padding-bottom: 10px;
+    }
+
+/* Footer Styles */
+footer {
+    background-color: #004080; /* Dark blue */
+    color: #ffffff;
+    text-align: center;
+    padding: 15px 0;
+    position: relative;
+    bottom: 0;
+    width: 100%;
+}
+
+/* Button Styles */
+.button {
+    display: inline-block;
+    background-color: #008CBA; /* Bright blue */
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+    .button:hover {
+        background-color: #005f75; /* Darker blue on hover */
+    }
+
+.delete-button {
+    display: inline-block;
+    background-color: #ff4d4d; /* Bright red */
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: background-color 0.3s; /* Smooth transition */
+}
+
+    .delete-button:hover {
+        background-color: #cc0000; /* Darker red on hover */
+    }
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+    header h1 {
+        font-size: 2em;
+    }
+
+    nav a {
+        margin: 0 10px;
+    }
+
+    section {
+        padding: 15px;
+    }
+
+    .button {
+        padding: 8px 15px;
+    }
 }
